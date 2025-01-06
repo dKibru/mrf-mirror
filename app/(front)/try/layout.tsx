@@ -27,73 +27,73 @@ export default function Layout({ children }: { children: ReactNode }) {
 
 	return (
 		<div className="w-full lg:grid lg:grid-cols-2 bg-sparko-bg min-h-screen h-full">
-			<GoogleCaptchaWrapper>
-				<Tabs defaultValue="" className="w-full max-w-3xl mx-auto p-6  ">
-					<div className="grid grid-cols-2 justify-evenly w-full mb-0 mt-10">
-						<TabButton
-							icon={<Table />}
-							label="MRF View"
-							isActive={primaryTab === "try"}
-							onClick={() => router.push("/try")}
-						/>
-						<TabButton
-							icon={<Search />}
-							label={"MRF Search"}
-							isActive={primaryTab === "try/mrf-search"}
-							onClick={() => router.push("/try/mrf-search")}
-						/>
-					</div>
-					<div className="bg-gray-100 p-4 rounded-b-lg">
-						{primaryTab === "try" && (
-							<div className="flex justify-evenly items-center border-b border-gray-300">
-								<SubTabButton
-									label="Negotiated Rates"
-									isActive={mrfViewTab === "negotiated_rates"}
-									onClick={() => setMrfViewTab("negotiated_rates")}
-								/>
-								<SubTabButton
-									label="Allowed Amount"
-									isActive={mrfViewTab === "allowed_amount"}
-									onClick={() => setMrfViewTab("allowed_amount")}
-								/>
-							</div>
-						)}
-
-						<div className=" bg-white relative overflow-hidden ">
-							<TabsContent value="">
-								{primaryTab === "try" && (
-									<div className="w-full bg-white  pb-8 px-8">
-										{mrfViewTab === "negotiated_rates" && (
-											<>
-												<h2 className="text-2xl pt-8 font-semibold text-center text-gray-800 mb-4">
-													Experience the Power of Rapid MRF Processing
-												</h2>
-												<TryMrfViewForm />
-											</>
-										)}
-										{mrfViewTab === "allowed_amount" && (
-											<>
-												<h2 className="text-2xl pt-8 font-semibold text-center text-gray-800 mb-4">
-													Experience the Power of Out of Network
-												</h2>
-												<AllowedAmountForm />
-											</>
-										)}
-									</div>
-								)}
-								{primaryTab === "try/mrf-search" && (
-									<div className="w-full bg-white  p-8">
-										<h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
-											Find MRF URLs with Ease
-										</h2>
-										<MrfSearchForm />
-									</div>
-								)}
-							</TabsContent>
+			{/* <GoogleCaptchaWrapper> */}
+			<Tabs defaultValue="" className="w-full max-w-3xl mx-auto p-6  ">
+				<div className="grid grid-cols-2 justify-evenly w-full mb-0 mt-10">
+					<TabButton
+						icon={<Table />}
+						label="MRF View"
+						isActive={primaryTab === "try"}
+						onClick={() => router.push("/try")}
+					/>
+					<TabButton
+						icon={<Search />}
+						label={"MRF Search"}
+						isActive={primaryTab === "try/mrf-search"}
+						onClick={() => router.push("/try/mrf-search")}
+					/>
+				</div>
+				<div className="bg-gray-100 p-4 rounded-b-lg">
+					{primaryTab === "try" && (
+						<div className="flex justify-evenly items-center border-b border-gray-300">
+							<SubTabButton
+								label="Negotiated Rates"
+								isActive={mrfViewTab === "negotiated_rates"}
+								onClick={() => setMrfViewTab("negotiated_rates")}
+							/>
+							<SubTabButton
+								label="Allowed Amount"
+								isActive={mrfViewTab === "allowed_amount"}
+								onClick={() => setMrfViewTab("allowed_amount")}
+							/>
 						</div>
+					)}
+
+					<div className=" bg-white relative overflow-hidden ">
+						<TabsContent value="">
+							{primaryTab === "try" && (
+								<div className="w-full bg-white  pb-8 px-8">
+									{mrfViewTab === "negotiated_rates" && (
+										<>
+											<h2 className="text-2xl pt-8 font-semibold text-center text-gray-800 mb-4">
+												Experience the Power of Rapid MRF Processing
+											</h2>
+											<TryMrfViewForm />
+										</>
+									)}
+									{mrfViewTab === "allowed_amount" && (
+										<>
+											<h2 className="text-2xl pt-8 font-semibold text-center text-gray-800 mb-4">
+												Experience the Power of Out of Network
+											</h2>
+											<AllowedAmountForm />
+										</>
+									)}
+								</div>
+							)}
+							{primaryTab === "try/mrf-search" && (
+								<div className="w-full bg-white  p-8">
+									<h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
+										Find MRF URLs with Ease
+									</h2>
+									<MrfSearchForm />
+								</div>
+							)}
+						</TabsContent>
 					</div>
-				</Tabs>
-			</GoogleCaptchaWrapper>
+				</div>
+			</Tabs>
+			{/* </GoogleCaptchaWrapper> */}
 
 			<div className="flex items-center justify-center py-12">
 				<div className="mx-auto grid gap-6">{children}</div>
