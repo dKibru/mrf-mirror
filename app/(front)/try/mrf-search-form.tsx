@@ -1,7 +1,7 @@
 "use client";
 import { startTransition, useState } from "react";
 import { LoaderCircle } from "lucide-react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+// import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
@@ -51,7 +51,7 @@ const formSchema = z
 	});
 
 export const MrfSearchForm = () => {
-	const { executeRecaptcha } = useGoogleReCaptcha();
+	// const { executeRecaptcha } = useGoogleReCaptcha();
 	const { toast } = useToast();
 
 	const [showLoading, setShowLoading] = useState(false);
@@ -61,10 +61,10 @@ export const MrfSearchForm = () => {
 	});
 
 	const handleSubmit = (values: z.infer<typeof formSchema>) => {
-		if (!executeRecaptcha) {
-			alert("Execute recaptcha not available yet");
-			return;
-		}
+		// if (!executeRecaptcha) {
+		// 	alert("Execute recaptcha not available yet");
+		// 	return;
+		// }
 		setShowLoading(true);
 		// executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
 		submitForm("gReCaptchaToken", values);
