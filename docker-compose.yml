@@ -1,0 +1,48 @@
+services:
+  trino:
+    container_name: trino
+    image: trinodb/trino
+    restart: "always"
+    volumes:
+      - ./:/var/tmp/
+      - $PWD/trino/etc:/etc/trino
+      - $PWD/trino/data:/usr/lib/trino/data
+    ports:
+      - "8080:8080"
+
+  metastore:
+    container_name: metastore
+    build:
+      context: trino/
+      dockerfile: metastore.Dockerfile
+    restart: "always"
+    volumes:
+      - ./:/var/tmp/
+      - $PWD/trino/metastore/conf/:/usr/local/metastore/conf/
+    ports:
+      - "9083:9083"
+    command: ["/usr/local/metastore/bin/start-metastore"]
+
+  db:
+    container_name: metastoredb
+    hostname: pg
+    build:
+      context: ./postgres
+    restart: "always"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 200M
+    environment:
+      POSTGRES_PASSWORD: Password1!
+      POSTGRES_DB: metastore_db
+      POSTGRES_USER: main
+    volumes:
+      - ./:/var/tmp/
+      - ./postgres/pgdata:/var/lib/postgresql/data
+      - ./postgres/initial/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5632:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "metastore_db"]
